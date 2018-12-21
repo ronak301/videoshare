@@ -1,0 +1,3 @@
+rootProject.name = 'videoshare'
+
+include ':app'
