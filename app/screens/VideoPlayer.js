@@ -33,7 +33,7 @@ export default class VideoPlayer extends Component {
     paused: false,
     skin: 'native',
     ignoreSilentSwitch: null,
-    isBuffering: false
+    isBuffering: true
   }
 
   static navigationOptions = {
