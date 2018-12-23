@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 const Realm = require('realm')
+import Share from 'react-native-share'
 
 const { width } = Dimensions.get('window')
 
@@ -163,9 +164,17 @@ export default class App extends React.Component {
   }
 
   onPressVideoItem = item => {
-    this.props.navigation.navigate('VideoPlayer', {
-      uri: item && item.fileUrl
-    })
+    // this.props.navigation.navigate('VideoPlayer', {
+    //   uri: item && item.fileUrl
+    // })
+
+    const shareOptions = {
+      title: 'Share via',
+      message: 'some message',
+      url: item.fileUrl,
+      social: Share.Social.WHATSAPP
+    }
+    Share.shareSingle(shareOptions)
   }
 }
 
