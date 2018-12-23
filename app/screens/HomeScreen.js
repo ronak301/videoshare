@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, Text, Dimensions, Image } from 'react-native'
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Dimensions,
+  Image
+} from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 const Realm = require('realm')
 
@@ -57,7 +63,13 @@ const dummyVideo4 = {
 
 export default class App extends React.Component {
   static navigationOptions = {
-    title: 'Video Status'
+    title: 'Video Status',
+    headerStyle: {
+      backgroundColor: '#4caf50'
+    },
+    headerTitleStyle: {
+      color: 'white'
+    }
   }
 
   constructor() {
@@ -131,20 +143,30 @@ export default class App extends React.Component {
 
   renderItem = ({ item }) => {
     return (
-      <View
-        style={{
-          borderWidth: 1,
-          borderColor: 'rgba(0,0,0,0.1)',
-          width: width / 2,
-          height: 250,
-          alignItems: 'center'
-        }}
-      >
-        <Image
-          source={{ uri: item.thumbUrl }}
-          style={{ width: width / 2, height: 248 }}
-        />
-      </View>
+      <TouchableOpacity onPress={() => this.onPressVideoItem(item)}>
+        <View
+          style={{
+            borderWidth: 1,
+            borderColor: 'rgba(0,0,0,0.1)',
+            width: width / 2,
+            height: 250,
+            alignItems: 'center'
+          }}
+        >
+          <Image
+            source={{ uri: item.thumbUrl }}
+            style={{ width: width / 2, height: 250 }}
+          />
+        </View>
+      </TouchableOpacity>
     )
   }
+
+  onPressVideoItem = item => {
+    this.props.navigation.navigate('VideoPlayer', {
+      uri: item && item.fileUrl
+    })
+  }
 }
+
+const styles = StyleSheet.create({})
